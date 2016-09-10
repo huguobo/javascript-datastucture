@@ -1,55 +1,88 @@
-// var line;
-// var data=[];
+//binarySearchTree.js
 
-// while(line = read_line()){
-//   data.push(line);
-// }
-
-var data=["abcda","ab","c"];
-var c=data.length;
-var n=0;
-
-while(n<c){
+function binarySearchTree(){
     
-    var path=data[n]+'';
-    n+=1;
-    var f=data[n]+'';
-    n+=1;
-    var  s=data[n]+'';
-    var ff=0;
-    var bf=0;
-    var match1=path.indexOf(f);
-    console.log("match1:"+match1);
+    //定义节点node数据结构
+    var node=function (key) {
+    	 this.left=null;
+    	 this.right=null;
+    	 this.value=key; 
+    }
     
-    if(match1>=0){
-    	var begin=parseInt(match1, 10)+f.length;
-        console.log("begin:"+begin)
-    	if(path.slice(begin).indexOf(s)>=0){
-    		ff=1;
-    	}
+    //初始化根
+    var root=null;
+
+   
+    //实现插入一个新节点的方法insert
+    this.insert=function (key) {
+    	 var newnode=new node(key);
+    	 if(root===null){
+    	 	root=newnode;
+    	 }
+    	 else{
+    	 	insertNode(root,newnode);
+    	 }
     }
-    var bpath=path.split('').reverse().join("")+'';
-    console.log("bpath:"+bpath);
-    var match2=bpath.indexOf(f);
-    console.log("match2:"+match2);
-    if(match2>=0){
-    	var begin=parseInt(match2, 10)+f.length;
-    	if(bpath.slice(begin).indexOf(s)>=0){
-    		bf=1;
-    	}
+    var insertNode=function (node,newnode) {
+    	 if(newnode.value<node.key){
+    	 	if(node.left===null){
+    	 		node.left=newnode;
+    	 	}
+    	 else{
+    	 	insertNode(root.left,newnode);
+    	   }
+    	 }
+    	 else {
+    	 	if(node.right===null){
+    	 		node.right=newnode;
+    	 	}
+    	 	else{
+    	 	insertNode(root.right,newnode);
+    	 	}
+    	 }
+
     }
-    console.log("bf:"+bf+",FF:"+ff);
-    if(ff>0&&bf>0){
-    	console.log("result:both");
+    
+    //树的遍历
+    
+   
+    //中序遍历
+    this.inOrderTraverse=function (callback) {
+    	 inOrderTraverseNode(root,callback);
     }
-    else if(ff>0){
-    	console.log("result:forward");
-    }
-    else if(bf>0){
-    	console.log("result:backward");
-    }
-    else{
-    	console.log("result:invalid");
-    }
-    n+=1;
+  
+   var inOrderTraverseNode=function (node,callback) {
+   	 if(node!==null){
+        inOrderTraverseNode(node.left,callback);
+   	 	callback(node.value);
+   	 	inOrderTraverseNode(node.right,callback);
+   	 }
    }
+
+   
+   //先序遍历
+   this.preOrderTraverse=function (callback) {
+   	    preOrderTraverseNode(root,callback);
+   }
+   var  preOrderTraverseNode=function (node,callback) {
+   	  if(node!==null){
+        callback(node.value);
+        preOrderTraverseNode(node.left,callback);
+   	 	preOrderTraverseNodee(node.right,callback);
+   	 }
+   }
+
+   //后序遍历
+   this.postOrderTraverse=function (callback) {
+   	   postOrderTraverseNode(root,callback);
+   }
+    var  postOrderTraverseNode=function (node,callback) {
+   	  if(node!==null){
+        postOrderTraverseNode(node.left,callback);
+   	 	postOrderTraverseNode(node.right,callback);
+        callback(node.value);
+   	 }
+   }
+
+
+}
