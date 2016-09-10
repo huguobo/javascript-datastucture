@@ -84,5 +84,26 @@ function binarySearchTree(){
    	 }
    }
 
+   //搜索特定值的方法search
+   this.search=function (value) {
+        return serchNode(root,value);
+    }
+
+    var searchNode=function (node,value) {
+         if (node=null) {
+             return false;
+         }
+         if(value<node.key){
+            return searchNode(node.left,value);
+         }
+         if(value>node.key){
+            return searchNode(node.right,value);
+         }
+         else{
+            return true;
+         }
+    }
+
+    //
 
 }
