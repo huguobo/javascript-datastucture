@@ -8,6 +8,7 @@ function SingleList() = {
   this.head = null;
 }
 
+
 SingleList.prototype.add = function(value){ //add to back of list.
   var newNode = new Node(value);
   if (this._length > 0){
@@ -19,6 +20,8 @@ SingleList.prototype.add = function(value){ //add to back of list.
   }
   return newNode;
 }
+
+
 
 SingleList.prototype.remove = function(value){ //remove a value from linked list if it exists.
   var currentNode = this.head;
